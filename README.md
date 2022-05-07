@@ -77,7 +77,7 @@
 
 3. 資料領域權限 `未完成`
     - 預設銷售（sales）、人資（rd）與技術（tech），共三種領域
-    - 透過query Builder，利用inner join與whereRelation取得相關資料
+    - 透過query Builder，利用join()取得相關資料
     例如：
     ```
     User::whereRelation('fields', 'user_id', $this->user->id);
