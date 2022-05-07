@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\ContactList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,17 @@ class ContactListController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            return $next($request);
+        });
+
+        // $this->lists =  DB::table('contact_lists')
+        // ->select('companies.*','companies.name AS company_name','fields.name AS field_name')
+        // ->join('companies', 'companies.id', 'contact_lists.company_id')
+        // ->join('users', 'users.id',  'contact_lists.user_id')
+        // ->join('fields', 'fields.id', 'contact_lists.field_id')
+        // ->where('user_id', $this->user->id);
     }
     /**
      * Display a listing of the resource.
@@ -118,10 +130,15 @@ class ContactListController extends Controller
      */
     public function destroy($id)
     {
-        $company = new Company;
-        $target = $company->find($id)->first()->name;
-        $company->destroy($id);
-        // dd($company->find($id)->first()->site);
-        return redirect()->route('home')->with(['status' => '已刪除1筆資料：' . $target]);
+        $list_item = ContactList::where('id', $id)->get()->toArray()[0];
+        $delete_name = Company::all()->find($list_item['company_id'])->name;
+
+        
+        $delete_list = ContactList::find($list_item['id'])->delete();
+        $delete_company = Company::find($list_item['company_id'])->delete();
+
+
+
+        return redirect('/')->with(['status' => '已刪除1筆資料：' . $delete_name]);
     }
 }

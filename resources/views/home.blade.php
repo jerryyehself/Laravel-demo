@@ -38,7 +38,7 @@
             </div>
             @endforeach
             <div class="d-flex justify-content-end">
-                {{ $lists->links() }}
+                <!--  $lists->links()  -->
             </div>
             @endif
         </div>

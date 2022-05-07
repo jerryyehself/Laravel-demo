@@ -1,4 +1,4 @@
-<div class="modal fade" id="Modaldestroy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modalcompanydestroy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col md-8">
-                        <form action="{{route('contactlist.destroy',[$list->id])}}" method="post" id="companyDestroyForm">
+                        <form action="{{route('contactlist.destroy',[$list->list_id])}}" method="post" id="companyDestroyForm">
                             @method('DELETE')
                             @csrf
                             是否確定刪除公司：{{$list->name}}
