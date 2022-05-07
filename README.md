@@ -12,7 +12,7 @@
     
 1. 關聯資料表
     - contact_lists（聯絡清單）
-        - 由上述三個資料表各自id（user_id、field_id、company_id）組成，欲利用inner join及where exist等方式獲取相關資料 `未完成`
+        - 由上述三個資料表各自id（user_id、field_id、company_id）組成，欲利用inner join方式獲取相關資料 
         - 多對多關係，使用belongsToMany相互關聯
 
 1. 實體關係
@@ -55,7 +55,7 @@
             @endcan
             ```
          - Route
-            - 若需區分權限（如上述僅主管能取得與增、刪、改職員資料），則於Route中加入middleware('can:權限')，網站管理者、主管包含一般職員的權限
+            - 若需區分權限（如上述僅主管能取得與增、刪、改職員資料），則於Route中加入middleware('can:權限')，網站管理者、主管包含一般職員的權限 `delete已完成`
             例如：
             ```
             Route::middleware('can:manager')->resource(
